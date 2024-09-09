@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from database import db
 from circuitbreaker import circuit
-from sqlalchemy import select
+from sqlalchemy import select,func
 
 from models.production import Production
 from models.product import Product
@@ -30,3 +30,10 @@ def find_all():
   query = select(Production)
   all_production = db.session.execute(query).scalars().all()
   return all_production
+
+def production_by_date(search_date):
+  subquery = db.session.query(Production).filter(Production.date == search_date).subquery()
+  query = db.session.query(
+    Product.name.label('name'),
+    func.sum(subquery.c.quantity).label('total_produced')).join(subquery, Product.id == subquery.c.product_id).group_by(Product.name).all()
+  return query

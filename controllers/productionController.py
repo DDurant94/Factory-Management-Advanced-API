@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from models.schemas.productionSchema import production_schema,all_production_schema
+from models.schemas.productionSchema import production_schema,all_production_schema,production_on_dates_schema,date_schema
 from services import productionService
 from marshmallow import ValidationError
 from caching import cache
@@ -20,3 +20,7 @@ def find_all():
   all_production = productionService.find_all()
   return all_production_schema.jsonify(all_production)
 
+
+def production_by_date(date):
+  production_on_dates= productionService.production_by_date(date)
+  return production_on_dates_schema.jsonify(production_on_dates)

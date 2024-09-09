@@ -8,7 +8,6 @@ class EmployeeSchema(ma.Schema):
   id = fields.Integer(required=False)
   name = fields.String(required=True, validate=validate.Length(min=1))
   position = fields.String(required=True, validate=validate.Length(min=1))
-  total = fields.String(required=False)
   production= fields.List(fields.Nested('ProductionSchema'), many=True)
   
   
@@ -17,8 +16,7 @@ class EmployeeProduction(ma.Schema):
   id = fields.Integer(required=False)
   name = fields.String(required=True, validate=validate.Length(min=1))
   position = fields.String(required=True, validate=validate.Length(min=1))
-  total = fields.String(required=False)
-  production= fields.List(fields.Nested('ProductionSchema'), many=True)
+  total_produced = fields.Integer(required=False)
   
 employee_production_schema = EmployeeProduction()
 employees_production_schema = EmployeeProduction(many=True)  

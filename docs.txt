@@ -19,30 +19,66 @@ About:
     password into config.py under SQLALCHEMY_DATABASE_URI. Then, return to README.MD and follow the Postman link once you have the program up 
     and running from app.py.
     
-        Folders Explanation:
+    Added Features:
+            Exploring (ROM Object-Relational Mapping) and Advanced Search Queries:
+            This project includes advanced search queries with SQLAlchemy and pagination, allowing the API to manage the amount of information 
+            loaded per page. Pagination has been added to the Orders and Products GET endpoints. The advanced search queries include Employee 
+            Production Report, Top Selling Products, Customer Lifetime Value, and Orders and Production Report. All these features can be 
+            found at the Postman link provided on my README page. 
 
-            Controllers:
-                    Controllers are where all the data is reviewed using SQLAlchemy to serialize and deserialize data that is given to and received 
-                from the database, ensuring the data submitted is in the correct format. When the information doesn’t meet the requirements, 
-                implemented error handling lets the user know where they went wrong.
+        Searches:
+            Employee Production:
+                This endpoint displays the total number of products an employee has produced from the time they started with the company to the 
+                present.
 
-            Models:
-                    Models lay out each table’s columns, rows, and relationships with other tables to grant access to that information. They also 
-                tell the database what kind of information it is looking for, whether it be a string, integer, list, or dictionary. Additionally, 
-                they can set restrictions on how long or short the data can be for each row, ensuring that the user enters the correct information.
+            Top Selling Products:
+                This endpoint displays the total quantity of each product that has been sold grouping them by name and ordering them in decreased 
+                order.
 
-                Schemas:
-                    Schemas is a subfolder of Models where the controller checks its data against a schema (model or template) to see if the 
-                    information matches the columns for that table. 
+            Customer Lifetime Value:
+                This endpoint displays the total amount of money each customer has spent with the company, provided it exceeds a set threshold. By 
+                using halving with SQLAlchemy.
 
-            Routes:
-                    Routes specify how the URL should look to find the endpoint for the specified operation you want to perform. Each blueprint can 
-                hold several routes, allowing for insertion, selection, deletion, and modification of information within the database.
+            Orders:
+                This endpoint now displays all information related to each order, including customer details, product information, and the 
+                remaining stock in inventory.
 
-            Services:
-                    Services is where all the ‘magic’ happens. All the data is validated and meticulously reviewed to ensure that when tables share 
-                information, it is indeed the correct type of information to be associated with one another. For instance, a product’s stock is 
-                automatically updated when the day’s production is entered at the end of the day. Data can be parsed and modified within services.
+            Production Report:
+                This endpoint displays the total amount produced by each product on a given date by using a sub-query to filter the dates. 
+
+        Pagination:
+            Orders:
+                Added paginate(amount of information the API gets at one time) to orders to display 10 orders on one page at a time as the 
+                default.
+
+            Products:
+                Added paginate(amount of information the API gets at one time) to products to display 10 orders on one page at a time as the 
+                default.
+
+    Folders Explanation:
+
+        Controllers:
+                Controllers are where all the data is reviewed using SQLAlchemy to serialize and deserialize data that is given to and received 
+            from the database, ensuring the data submitted is in the correct format. When the information doesn’t meet the requirements, 
+            implemented error handling lets the user know where they went wrong.
+
+        Models:
+                Models lay out each table’s columns, rows, and relationships with other tables to grant access to that information. They also 
+            tell the database what kind of information it is looking for, whether it be a string, integer, list, or dictionary. Additionally, 
+            they can set restrictions on how long or short the data can be for each row, ensuring that the user enters the correct information.
+
+            Schemas:
+                Schemas is a subfolder of Models where the controller checks its data against a schema (model or template) to see if the 
+                information matches the columns for that table. 
+
+        Routes:
+                Routes specify how the URL should look to find the endpoint for the specified operation you want to perform. Each blueprint can 
+            hold several routes, allowing for insertion, selection, deletion, and modification of information within the database.
+
+        Services:
+                Services is where all the ‘magic’ happens. All the data is validated and meticulously reviewed to ensure that when tables share 
+            information, it is indeed the correct type of information to be associated with one another. For instance, a product’s stock is 
+            automatically updated when the day’s production is entered at the end of the day. Data can be parsed and modified within services.
 
 PIP Installs:
     Refer to requirements.txt

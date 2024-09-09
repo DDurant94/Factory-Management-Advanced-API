@@ -8,7 +8,19 @@ class ProductionSchema(ma.Schema):
   quantity = fields.Integer(required=True)
   date = fields.Date(required=True)
   product= fields.Nested('ProductSchema')
+  
+  
+class ProductionOnDatesSchema(ma.Schema):
+  name = fields.String(required=True)
+  total_produced = fields.Integer(required=True)
+  
+  
+class DateSchema(ma.Schema):
+  date = fields.Date(required=True)
     
+production_on_dates_schema = ProductionOnDatesSchema(many=True)
+date_schema = DateSchema()
+
 production_schema = ProductionSchema()
 all_production_schema = ProductionSchema(many=True)
   

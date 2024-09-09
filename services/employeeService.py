@@ -33,18 +33,13 @@ def find_all():
   return employees
 
 def employee_production_analyses_query():
-  # subquery = select(Production.product_id).join(
-  #   Product,Production.product_id == Product.id
-  #   ).subquery()
-  query = select(Employee).join(Production,
+
+  query = db.session.query(Employee.name,
+                           Employee.id,
+                           Employee.position,
+                           func.sum(Production.quantity).label('total_produced')).join(Production,
                 Employee.id == Production.employee_id).join(Product, 
-                Production.product_id == Product.id
-                ).group_by(
-                Employee.name)
-  # func.sum(Production.quantity).label('total')
- 
-                # , func.sum(Production.quantity,Production.id==Product.id).label('total')
-  report = db.session.execute(query).scalars().all()
-  print(report)
-  # breakpoint()
-  return report
+                Production.product_id == Product.id).group_by(Employee.name,
+                                                              Employee.id,
+                                                              Employee.position).all()
+  return query

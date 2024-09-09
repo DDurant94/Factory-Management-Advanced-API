@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from models.schemas.productSchema import product_schema,products_schema
+from models.schemas.productSchema import product_schema,products_schema,top_selling_product_schema
 from services import productService
 from marshmallow import ValidationError
 from caching import cache
@@ -21,3 +21,7 @@ def find_all():
   per_page=request.args.get('per_page',10,type=int)
   return products_schema.jsonify(productService.find_all(page=page,per_page=per_page)), 200
   
+
+def find_top_selling_product():
+  top_selling = productService.find_top_selling_product()
+  return top_selling_product_schema.jsonify(top_selling)

@@ -24,6 +24,5 @@ def find_all():
 
 def employee_production_analyses_query():
   analyses = employeeService.employee_production_analyses_query()
-  return jsonify(employees_production_schema.dump(analyses))
   return employees_production_schema.jsonify(analyses), 200
   
