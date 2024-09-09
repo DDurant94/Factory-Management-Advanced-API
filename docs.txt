@@ -1,0 +1,121 @@
+About:
+        In Factory Management, you will find several files that control this API, making for a modular design perfect for readability, 
+    navigation, and debugging purposes. Each file has a purpose specified by its name. Within each folder, each table of the database has a 
+    file that is specific to that folder’s purpose. With its RESTful API design, it is easy to scale this program to whatever the user needs for 
+    their growing business. I have used SQLAlchemy to help with API calls and validation of data so that no stone is left unturned. I have also 
+    implemented caching and limiters to ensure that information can be accessed quickly and easily by storing it locally. The limiters I have 
+    installed ensure that the API doesn’t get overwhelmed and crash due to high traffic or strain.
+
+        There are five groups of endpoints that the user can interact with: customer, employee, product, production, and order. All five groups can 
+    create/add and view data at this point in the program’s design. The only endpoint that will stand out to you is “view orders.” I have set up 
+    this endpoint to present all of the customer’s information and products ordered, including a total for each item ordered and the total amount 
+    with tax (9%) spent on that order. This allows the front-end to present the information without needing to parse it.
+
+    Another notable feature within this program is that when adding an item’s production at the end of the day, the stock is automatically 
+    updated to reflect that information by calling an instance of that product and changing the quantity available. The same happens when you 
+    add an order; the stock is automatically decreased.
+
+        If you want to play around with this API and see it in action, all you need to do is set up a database in MySQL Workbench and enter your 
+    password into config.py under SQLALCHEMY_DATABASE_URI. Then, return to README.MD and follow the Postman link once you have the program up 
+    and running from app.py.
+    
+        Folders Explanation:
+
+            Controllers:
+                    Controllers are where all the data is reviewed using SQLAlchemy to serialize and deserialize data that is given to and received 
+                from the database, ensuring the data submitted is in the correct format. When the information doesn’t meet the requirements, 
+                implemented error handling lets the user know where they went wrong.
+
+            Models:
+                    Models lay out each table’s columns, rows, and relationships with other tables to grant access to that information. They also 
+                tell the database what kind of information it is looking for, whether it be a string, integer, list, or dictionary. Additionally, 
+                they can set restrictions on how long or short the data can be for each row, ensuring that the user enters the correct information.
+
+                Schemas:
+                    Schemas is a subfolder of Models where the controller checks its data against a schema (model or template) to see if the 
+                    information matches the columns for that table. 
+
+            Routes:
+                    Routes specify how the URL should look to find the endpoint for the specified operation you want to perform. Each blueprint can 
+                hold several routes, allowing for insertion, selection, deletion, and modification of information within the database.
+
+            Services:
+                    Services is where all the ‘magic’ happens. All the data is validated and meticulously reviewed to ensure that when tables share 
+                information, it is indeed the correct type of information to be associated with one another. For instance, a product’s stock is 
+                automatically updated when the day’s production is entered at the end of the day. Data can be parsed and modified within services.
+
+PIP Installs:
+    Refer to requirements.txt
+
+Questions:
+    Implementing Pagination in the Factory Management System
+    Objective: The objective of this assignment is to enhance the factory management system by implementing pagination for retrieving orders and 
+    products efficiently using Flask.
+
+    Problem Statement: 
+        You are tasked with extending the factory management system to support pagination for retrieving orders and products. 
+        Pagination allows for fetching large datasets in smaller, manageable chunks, improving system performance and user experience.
+
+    Task 1: Implement Pagination for Orders
+
+    Modify the existing endpoint /orders to support pagination by adding query parameters for page and per_page.
+    Implement pagination logic in the backend to retrieve orders in batches based on the provided parameters.
+
+    Task 2: Implement Pagination for Products
+
+    Update the /products endpoint to incorporate pagination functionality similar to the orders endpoint.
+    Adjust the backend logic to fetch products in paginated form based on the specified parameters.
+
+    Task 3: Test Pagination Endpoints
+
+    Test the pagination endpoints /orders and /products using various combinations of page and per_page parameters.
+    Verify that the endpoints return the expected results and handle edge cases such as out-of-range page numbers gracefully.
+
+    Expected Outcomes:
+    Upon completing this assignment, students should achieve the following outcomes:
+
+    Implementation of pagination functionality for retrieving orders and products, improving system performance and user experience.
+    Integration of pagination logic into the existing factory management system, ensuring seamless interaction with large datasets.
+    Successful testing of pagination endpoints to validate correct functionality and handle edge cases effectively.
+    Advanced Querying in Factory Management System with SQLAlchemy
+    Objective: The objective of this assignment is to practice performing complex queries using SQLAlchemy in a factory management system. This includes utilizing Group By, Having, Joins, and Subqueries to extract meaningful insights and data from the database.
+
+    Problem Statement: 
+        You are tasked with implementing advanced querying operations in the factory management system to analyze employee performance, 
+        track production efficiency, and gain insights into customer behavior. This involves executing queries that involve grouping, filtering, 
+        joining multiple tables, and using subqueries to extract relevant information from the database.
+
+    Task 1: Analyze Employee Performance
+
+    Write a query to calculate the total quantity of products each employee has produced.
+    Group the results by employee name.
+    Use the Group By clause to group the data and the Sum function to calculate the total quantity.
+
+    Task 2: Identify Top Selling Products
+
+    Write a query to find the top-selling products based on the total quantity ordered.
+    Group the results by product name.
+    Use the Group By clause to group the data, the Sum function to calculate the total quantity ordered for each product, and the Order By 
+    clause to sort the results in descending order of quantity.
+
+    Task 3: Determine Customer Lifetime Value
+
+    Write a query to calculate the total value of orders placed by each customer.
+    Group the results by customer name.
+    Use the Group By clause to group the data and the Sum function to calculate the total order value.
+    Filter out customers with a total order value less than a certain threshold using the Having clause.
+
+    Task 4: Evaluate Production Efficiency
+
+    Write a query to calculate the total quantity produced for each product on a specific date.
+    Join the Production and Product tables on the product_id column.
+    Use a subquery to filter the production records for the specified date.
+    Group the results by product name.
+
+    Expected Outcomes:
+    Upon completing this assignment, students should achieve the following outcomes:
+
+    Proficiency in writing complex queries using SQLAlchemy to analyze various aspects of the factory management system.
+    Ability to utilize Group By, Having, Joins, and Subqueries to extract meaningful insights and data from the database.
+    Understanding of how to perform advanced querying operations to evaluate employee performance, track production efficiency, identify 
+    top-selling products, and determine customer lifetime value.
